@@ -45,14 +45,18 @@
     show-bibliography-as-footnote: bibliography(title: none, "bibliography.bib"),
   ),
   config-info(
-    title: [Engineering Collective Systems],
-    subtitle: [Language-based approach to programming "swarms" of devices],
+    title: [Neighbor-Based Decentralized Training Strategies for
+Multi-Agent Reinforcement Learning],
+    subtitle: [ACM Symposium on Applied Computing \@ SAC 2025, MLA Track],
     author: author_list(
       (
-        (first_author("Gianluca Aguzzi"), "gianluca.aguzzi@unibo.it"),
+        ("Nicolò Malucellli", "nicolo.malucelli@gmail.com"),
+        (first_author("Davide Domini"), "davide.domini@unibo.it"),
+        ("Gianluca Aguzzi", "gianluca.aguzzi@unibo.it"),
+        ("Mirko Viroli", "mirko.viroli@unibo.it"),
       ), logo: "images/disi.svg"
     ),
-    date: datetime(day: 31, month: 03, year: 2025).display("[day] [month repr:long] [year]"),
+   // date: datetime(day: 31, month: 03, year: 2025).display("[day] [month repr:long] [year]"),
     // institution: [University of Bologna],
     // logo: align(right)[#image("images/disi.svg", width: 55%)],
   ),
@@ -87,25 +91,16 @@
 
 // #components.adaptive-columns(outline(title: none, indent: 1em))
 
-== Hello, Bergen! :)
 
-#components.side-by-side(columns: (1fr, 2fr), gutter: 0em)[
-  #block(clip: true, radius: 50%, stroke: 0.5em + rgb("#eb811b5f"))[#figure(image("images/myself.jpeg", width: 85%))]
-][
-  === Gianluca Aguzzi
 
-  - Postdoctoral Reseacher at the _University of Bologna_ (Cesena)
-  - Adjust professor on topics related to OOP and FP and AI-based software engineering
-  - Researcher at the #emph[Pervasive Software Lab] \ #fa-globe() #h(0.4em) #text(blue)[#link("https://pslab-unibo.github.io")] (prof. Mirko Viroli)
+// = Shaping Tomorrow's Systems
 
-  === Research Scope and Interests
-  - Macroprogramming languages for _collective adaptive systems_
-  - Automated design for collective behaviors
-  - Integration of #emph[AI] and #emph[ML] with collective programming paradigms
+== Multi-Agent Reinforcement Learning
+#align(center)[
+  #figure(image("images/marl.svg", width: 80%))
 ]
 
-= Shaping Tomorrow's Systems
-== Vision of Future Technologies
+== MARL Examples
 #components.side-by-side(columns: (1fr, 1fr, 1fr))[
   #figure(image("images/smart-city.jpeg", height: 60%))
 ][
@@ -113,6 +108,10 @@
 ][
   #figure(image("/images/drones.jpeg", height: 60%))
 ]
+
+== Formalization
+- In this paper, we consider *partially observable networked markov decision process* <small>[1]</small> as a tuple La funzione $cal(A)$ è continua.
+
 
 == What they have in common?
 - A plethora of _devices_ and _services_ that need to work together
