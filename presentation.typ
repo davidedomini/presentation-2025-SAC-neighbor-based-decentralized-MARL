@@ -109,8 +109,19 @@ Multi-Agent Reinforcement Learning],
   #figure(image("/images/drones.jpeg", height: 60%))
 ]
 
+
 == Formalization
-- In this paper, we consider *partially observable networked markov decision process* <small>[1]</small> as a tuple La funzione $cal(A)$ è continua.
+- In this paper, we consider #emph[partially observable networked markov decision process] #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal{G}, cal{S}, cal{A}, cal{O}, cal{P}, cal{R}, #sym.gamma) $
+- Where:
+    - $cal{G} = (N, E)$ is a #emph[communication graph], where $N$ is the set of $n$ #emph[agents] and $E #sym.subset.eq N #sym.times N$ represents the #emph[communication links] between agents. Time-varying graphs $cal{G}_t = (N, E_t)$ can be used to represent communication evolving over time $t$
+    - $cal{S}$ is the #emph[global state space]
+    - $cal{A} = cal{A}^1 #sym.times #sym.dots #sym.times cal{A}^n$ is the #emph[joint action space], where $cal{A}^i$ is the #emph[action space of agent] $i$
+    - $cal{O} = cal{O}^1 #sym.times #sym.dots #sym.times cal{O}^n$ is the #emph[joint observation space], where $cal{O}^i$ is the #emph[observation space for agent] $i$
+    - $cal{P}: cal{S} #sym.times cal{A} #sym.times cal{S} #sym.arrow.r  [0, 1]$ is the #emph[state transition function], describing the probability of transitioning to a new state $s' #sym.in cal{S}$ given the current state $s #sym.in cal{S}$ and joint action $a \in cal{A}$
+    - $cal{R} = \{cal{R}^i\}, {i #sym.in N}$, where $cal{R}^i: cal{S} #sym.times cal{A} #sym.arrow.r R$ is the #emph[reward function] for agent $i$
+    - $#sym.gamma #sym.in [0, 1]$ is the #emph[discount factor]
+
+
 
 
 == What they have in common?
