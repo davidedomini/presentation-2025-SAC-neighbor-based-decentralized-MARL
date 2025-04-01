@@ -117,8 +117,8 @@ In this paper, we consider *partially observable networked markov decision proce
 
   - $cal(G) = (N, E)$ is a *communication graph*, where $N$ is the set of $n$ *agents* and $E #sym.subset.eq N #sym.times N$ represents the *communication links* between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
   - $cal(S)$ is the *global state space*
-  - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the *action space of agent* $i$
-  - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the *observation space for agent* $i$
+  - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the action space of agent $i$
+  - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the observation space for agent $i$
   - $cal(P): cal(S) #sym.times cal(A) #sym.times cal(S) #sym.arrow.r  [0, 1]$ is the *state transition function*, describing the probability of transitioning to a new state $s' #sym.in cal(S)$ given the current state $s #sym.in cal(S)$ and joint action $a #sym.in cal(A)$
   - $cal(R) = \{cal(R)^i\}, {i #sym.in N}$, where $cal(R)^i: cal(S) #sym.times cal(A) #sym.arrow.r R$ is the *reward function* for agent $i$
   - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
