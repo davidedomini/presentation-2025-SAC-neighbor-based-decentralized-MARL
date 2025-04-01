@@ -111,9 +111,8 @@ Multi-Agent Reinforcement Learning],
 
 
 == Formalization
-- In this paper, we consider #emph[partially observable networked markov decision process] #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$
-Where:
-#text(size: 5pt)[
+In this paper, we consider #emph[partially observable networked markov decision process] #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$, where:
+#text(size: 10pt)[
   - $cal(G) = (N, E)$ is a #emph[communication graph], where $N$ is the set of $n$ #emph[agents] and $E #sym.subset.eq N #sym.times N$ represents the #emph[communication links] between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
   - $cal(S)$ is the #emph[global state space]
   - $cal(A) = cal{A}^1 #sym.times #sym.dots #sym.times cal{A}^n$ is the #emph[joint action space], where $cal(A)^i$ is the #emph[action space of agent] $i$
