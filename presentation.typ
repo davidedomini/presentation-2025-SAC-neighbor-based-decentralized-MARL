@@ -124,6 +124,58 @@ In this paper, we consider *partially observable networked markov decision proce
   - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
 
 
+== Learning and Execution Strategies
+#components.side-by-side(columns: (1fr, 1fr))[
+  #align(center)[#text(size: 30pt)[=== CTDE]]
+  #figure((image("images/CTDE.svg", width:90%)))
+][
+  #align(center)[#text(size: 30pt)[=== DTDE]]
+  #figure((image("images/DTDE.svg", width:90%)))
+]
+
+
+
+== Motivation
+#let research-block(title, items) = block(
+  stroke: 2pt + gray.darken(20%),
+  fill: rgb("#eb811b5f").lighten(50%),
+  radius: 0em,
+  inset: 1em,
+  width: 100%,
+  height: 30%
+)[
+  === #title
+  #set text(size: 16pt)
+  #items
+]
+
+#components.side-by-side(columns: (1fr, 1fr, 1fr))[
+  #research-block("Key challenge in MARL", [
+     Balancing #emph[scalability] and #emph[performance]
+  ])
+][
+  #research-block("Limitations of CTDE", [
+    Effective but suffers from #emph[computational bottlenecks] and #emph[scalability] issues
+  ])
+][
+  #research-block("Limitations of DTDE", [
+     Improves scalability but often #emph[ignores inter-agent coordination], leading to suboptimal performance
+  ])
+]
+#components.side-by-side(columns: (1fr, 1fr, 1fr))[
+  #only(2)[#research-block("Neighbor-based approaches", [
+    Promising in tabular settings but largely #emph[unexplored] in deep reinforcement learning
+  ])]
+][
+  #only(2)[#research-block("Contribution of this work", [
+  Integrates #emph[deep learning] with #emph[neighbor-based strategies] 
+  ])]
+][
+  #only(2)[#research-block("Goal", [
+    Achieve both efficient #emph[decentralized learning] and #emph[effective coordination]
+  ])]
+]
+
 
 == What they have in common?
 - A plethora of _devices_ and _services_ that need to work together
@@ -288,6 +340,7 @@ The entire (_macro_-)program is executed by #emph[all the devices] in the networ
 #quote[The system self-stabilizes to a predictable limit state as device density and speed increase #cite(label("7774387"))]
 === Space-time Universality
 #quote[The system is able to compute any computable function, given enough time and space])
+
 
 == Research Area
 #let research-block(title, items) = block(
