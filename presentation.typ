@@ -186,23 +186,23 @@ In this paper, we consider #emph[partially observable networked markov decision 
 #only(2)[
  === Reference Scenarios
  - *Urban traffic prediction:* traffic patterns observed by devices within the same city district are likely to be more similar compared to those observed by devices in different districts
- - *Building heating management:* buildings in residential districts exhibit different healing patterns compared to those in industrial districts
+ - *Building heating management:* buildings in residential districts exhibit different heating patterns compared to those in industrial districts
 ]
 
-== K-nearest Neighbors Formalization
+// == K-nearest Neighbors Formalization
 
-Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
-  - $N$ is the set of *agents*
-  - $E$ is the set of *edges* (i.e., communication link)
-  - $W: E #sym.arrow.r #sym.RR^+$ is a weight function assigning a *positive weight* to each edge
+// Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
+//   - $N$ is the set of *agents*
+//   - $E$ is the set of *edges* (i.e., communication link)
+//   - $W: E #sym.arrow.r #sym.RR^+$ is a weight function assigning a *positive weight* to each edge
 
-#only(2)[
-  Let $d(i,j)$ denote the *shortest path* length between agents $i$ and $j$ in the weighted graph $G$
-  - The length of a path is the *sum of the weights* of the edges along the path
-  - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
-  - Then, the set of *k-nearest neighbors* of agent $i$ is defined as: 
-    - $N_(k)(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
-]
+// #only(2)[
+//   Let $d(i,j)$ denote the *shortest path* length between agents $i$ and $j$ in the weighted graph $G$
+//   - The length of a path is the *sum of the weights* of the edges along the path
+//   - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
+//   - Then, the set of *k-nearest neighbors* of agent $i$ is defined as: 
+//     - $N_(k)(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
+// ]
 
 == K-Nearest Neighbor Averaging
 
