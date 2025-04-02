@@ -110,18 +110,18 @@ Multi-Agent Reinforcement Learning],
 ]
 
 
-// == Formalization
-// In this paper, we consider *partially observable networked markov decision process* #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$, where:
+== Formalization
+In this paper, we consider #emph[partially observable networked markov decision process] #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$, where:
 
-// #h(0.5cm)
+#h(0.5cm)
 
-//   - $cal(G) = (N, E)$ is a *communication graph*, where $N$ is the set of $n$ *agents* and $E #sym.subset.eq N #sym.times N$ represents the *communication links* between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
-//   - $cal(S)$ is the *global state space*
-//   - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the action space of agent $i$
-//   - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the observation space for agent $i$
-//   - $cal(P): cal(S) #sym.times cal(A) #sym.times cal(S) #sym.arrow.r  [0, 1]$ is the *state transition function*, describing the probability of transitioning to a new state $s' #sym.in cal(S)$ given the current state $s #sym.in cal(S)$ and joint action $a #sym.in cal(A)$
-//   - $cal(R) = \{cal(R)^i\}, {i #sym.in N}$, where $cal(R)^i: cal(S) #sym.times cal(A) #sym.arrow.r R$ is the *reward function* for agent $i$
-//   - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
+  - $cal(G) = (N, E)$ is a *communication graph*, where $N$ is the set of $n$ *agents* and $E #sym.subset.eq N #sym.times N$ represents the *communication links* between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
+  - $cal(S)$ is the *global state space*
+  - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the action space of agent $i$
+  - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the observation space for agent $i$
+  - $cal(P): cal(S) #sym.times cal(A) #sym.times cal(S) #sym.arrow.r  [0, 1]$ is the *state transition function*, describing the probability of transitioning to a new state $s' #sym.in cal(S)$ given the current state $s #sym.in cal(S)$ and joint action $a #sym.in cal(A)$
+  - $cal(R) = \{cal(R)^i\}, i #sym.in N$, where $cal(R)^i: cal(S) #sym.times cal(A) #sym.arrow.r R$ is the *reward function* for agent $i$
+  - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
 
 
 == Learning and Execution Strategies
@@ -192,15 +192,15 @@ Multi-Agent Reinforcement Learning],
 == K-nearest Neighbors Formalization
 
 Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
-  - $N$ is the set of #emph[agents]
-  - $E$ is the set of #emph[edges] (i.e., communication link)
-  - $W: E #sym.arrow.r #sym.RR^+$ is a weight function assigning a #emph[positive weight] to each edge
+  - $N$ is the set of *agents*
+  - $E$ is the set of *edges* (i.e., communication link)
+  - $W: E #sym.arrow.r #sym.RR^+$ is a weight function assigning a *positive weight* to each edge
 
 #only(2)[
-  Let $d(i,j)$ denote the #emph[shortest path] length between agents $i$ and $j$ in the weighted graph $G$
-  - The length of a path is the #emph[sum of the weights] of the edges along the path
+  Let $d(i,j)$ denote the *shortest path* length between agents $i$ and $j$ in the weighted graph $G$
+  - The length of a path is the *sum of the weights* of the edges along the path
   - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
-  - Then, the set of #emph[k-nearest neighbors] of agent $i$ is defined as: 
+  - Then, the set of *k-nearest neighbors* of agent $i$ is defined as: 
     - $N_(k)(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
 ]
 
@@ -211,270 +211,88 @@ Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
 - Formally, the update rule for agent $i$ at time $t+1$ is:
   - $#sym.theta^(t+1)_i = #sym.theta^t_i + #sym.alpha #sym.sum _(j #sym.in N_(k)(i)) frac(1,k) #sym.theta^t_j$ 
 
-== What they have in common?
-- A plethora of _devices_ and _services_ that need to work together
-  - *Autonomous* and *distributed* systems
-    - E.g., autonomous vehicles, smart cities, drones, IoT
-  - *Heterogeneous* components with varying capabilities and resources
-    - E.g., sensors, actuators, mobile devices, cloud services
-  - Need for *autonomous decision-making* at both local and global levels
-    - E.g., balancing global traffic optimization while satisfying individual routing needs
-  - *Coordination challenges* across different spatial and temporal scales
-    - E.g., traffic may be congested in one area while free-flowing in another
-- The focus of these systems is on the #emph[collective behavior] rather than on individual _devices_
-== Collective Systems
+== K-Nearest Neighbor Consensus
 
-#quote[Complex systems composed of a large number of #underline[devices] that interact each other to achieve a global #underline[common goal]] #cite(label("DBLP:conf/birthday/BucchiaroneM19"))
+- This approach allows each agent to *learn independently* and periodically select the *best-performing agent within its neighborhood*
+- Let $R^n_(i)(t)$ be the average reward obtained by agent $i$ over the last $n$ episodes
+- At each time step $t$, each agent $i$ identifies the best-performing neighbor $#sym.beta$ within its k-neighborhood $N_(k)(i)$:
+  - $#sym.beta = op("argmax", limits: #true)_(j #sym.in N_(k)(i)) R_(j)(t)^n$
 
-=== Design challenges
+- Agent $i$ then updates its Q-network parameters $#sym.theta _i$ using the parameters of the best-performing neighbor:
+
+  - $#sym.theta^(t+1)_(i) #sym.arrow.l #sym.theta^(t+1)_(#sym.beta)$ 
+
+== K-Nearest Neighbor Experience Sharing
+
+- Each agent maintains *its own experience replay buffer*, but also *augments* it by collecting a fraction of each *neighbor’s buffer*
+- This allows agents to learn from each other’s experiences
+- Formally, we define:
+  - $cal(D)_i^t$ the replay buffer of the agent $i$ at time $t$
+  - $#sym.beta #sym.in #sym.NN^+$ the number of experiences to collect from each neighbor
+  - $#sym.phi : cal(D) #sym.times #sym.NN^+ #sym.arrow.r cal(D)$ a function that extracts a subset of cardinality $k$ from a replay buffer $H$ 
+  - The update rule for agent $i$ at time $t+1$ is: $cal(D)^(t+1)_i = cal(D)^t_i #sym.union #sym.union.big _(j #sym.in N_(k)(i)) #sym.phi (cal(D)^t_i, #sym.beta)$ 
+
+== Evaluation: Simulation Scenario
+
+- Multiple agents must *cooperate* to achieve a *common goal*
+- It consists of a 2D Euclidean space populated by *A agents* and *T targets*, initially placed at random locations
+- #emph[Goal:] agents must work together to *capture* all targets, resulting in a successful termination of the environment episode
+- #emph[Reward composed by various factor:] collisions, time steps, moving towards items, moving away from agents
+#only(2)[
+   #figure((image("images/behavior.svg", width:40%)))
+]
+
+== Evaluation: Experimental Setup
+- The environment was implemented using the #emph[Gymnasium framework]
+- #emph[Libraries]: *Ray* (in particular,its module *RLlib*), and *PyTorch*
+- #emph[Multiple learning algorithms:] totally centralized, totally distributed, MAPPO and the three neighbor-based strategies
+- Each method was evaluated across *10 distinct random seeds*
+- Each experiment consisted of *50 training episodes*
+- #emph[Evaluation:] 5 different methods and for each method we varied the number of agents (8, 16 and 32)
+
+== Evaluation: Metrics
+
+=== Mean Episode Reward
+
+- For a certain episode $i$, composed of $n$ agents, last $T$ time steps, the total reward is calculated as: $R_i = #sym.sum^T_(t=0) #sym.sum^t_(j=1) r_j^t$
+- The reward $R_("mean")$, for the all the episodes N, can be calculated as the *arithmetic mean* of the individual rewards per episode 
+
+=== Mean Episode Length
+- Represents the average number of time steps needed to reaching the terminal state
+- $L_("mean") = frac(1,N) #sym.sum^N_(i=0) L_i$
+
+
+== Evaluation: Training Results
 
 #components.side-by-side[
-  - #emph[Heterogeneity]: #text(size: 18pt)[Different types of devices with different capabilities]
-  - #emph[Scalability]: #text(size: 18pt)[Systems can be composed of thousands of devices]
-  - #emph[Dynamicity]: #text(size: 18pt)[Devices can join and leave the system at any time]
+   #figure((image("images/episode_len_mean.jpg", width: 90%)))
 ][
-  #figure((image("images/step-11.png", width: 70%)))
+  #figure((image("images/episode_reward_mean.jpg", width: 90%)))
 ]
 
-== How? Macroprogramming for Collective Systems
-
-#components.side-by-side(columns: (1fr, 1fr))[
-  === Core Idea
-
-  A *single program* #math.text("P") describes the _collective_ *self-org* behavior of the system.
-
-  - #emph[Macroprogramming] abstractions
-    - _Spatial_ and _temporal_ operators
-  - #emph[Proximity-based] interactions
-  - Resilient #emph[coordination] mechanisms
-][
-  #figure((image("images/scr-result.png", width:100%)))
-]
-
-#v(1.5em)
-
-#align(center)[
-  Shift from a #underline[device-centric] to a *collective-centric* view of the system.
-
-  #underline[Aggregate Computing] #cite(label("DBLP:journals/computer/BealPV15")) as a way to program such systems.
-]
-
-== Aggregate Computing -- In a nutshell
-#components.side-by-side(columns: (1fr, 1fr, 1fr), gutter: 1em, align: bottom)[
-  === Field Calculus Core
-  
-  #quote[A #emph[field] is a *distributed* data structure that associates a _value_ to each _device_ in the system]#cite(label("DBLP:conf/coordination/AudritoBDV18"))
-  
-  #set list(marker: box(fill: rgb("#eb811b5f"), inset: 0.15em, text(size: 0.7em, rgb("#23373b"), [→])))
-  - Based on *computational fields*
-  - Provides abstractions for:
-    - #text(size: 18pt)[Spatial computations]
-    - #text(size: 18pt)[Collective behaviors]
-    - #text(size: 18pt)[Self-organization]
-][
-  === Field Composition
-  
-  #set list(marker: box(fill: rgb("#eb811b5f"), inset: 0.15em, text(size: 0.7em, rgb("#23373b"), [→])))
-  - Fields can be *composed* through standard operations
-  - Functions map input fields to output fields 
-  - #emph[Functional approach] to distributed computing
-  
-  #figure(image("images/channel.svg", width: 60%))
-][
-  #v(-3em)
-  === Execution Model
-  
-  #set list(marker: box(fill: rgb("#eb811b5f"), inset: 0.15em, text(size: 0.7em, rgb("#23373b"), [→])))
-  - #emph[Behaviour]: async rounds  
-  - #emph[Interaction]: neighbour messaging
-  - #emph[Alignment]: AST-based alignment
-  
-  #figure(image("images/ac.svg", width: 80%))
-]
-
-== Field Calculus
-#align(center)[
-  #figure(image("images/field.png", width: 40%))
-]
-#quote[A #emph[field] is a *distributed* data structure that associates a _value_ to each _device_ in the system]#cite(label("DBLP:conf/coordination/AudritoBDV18"))
-
-#components.side-by-side[
-  === Neighboring
-  ```scala
-  val f = nbr(10.0)
-  //> f: Field[Double]
-  ```
-][
-  === Repeating
-  ```scala
-  val a = rep(0): it =>
-    it + 1
-  ```
-][
-  === Branching
-  #v(0.42em)
-  ```scala
-  branch(cond) { nbr(0) } { 
-    nbr(Int.MaxValue)
-  }
-  ```
-]
-== Aggregate Programming
-
-#components.side-by-side(columns: (2fr, auto))[
-  === Field Composition
-  ```scala
-  def channel(source: Boolean, destination: Boolean): Boolean {
-    val toSource = gradient(source) // Field[Double]
-    val toDestination = gradient(destination) // Field[Double]
-    val distance = distanceTo(source, destination)
-    (toSource + toDestination - distance) <= 10
-  }
-  ```
-
-  Functions take #emph[fields] as *input* and return #emph[field] as *output*.
-][
-  #figure(image("images/channel.svg", height: 45%))
-]
-
-//#v(0.5em)
-
-The entire (_macro_-)program is executed by #emph[all the devices] in the network, assuming that each device *should* execute #emph[all] the functions.
-
-== Self-organizing Computational Model
-
-#emph[Behaviour]: execution with #underline[async rounds] \
-#emph[Interaction]: *neighbours* #underline[messages exchange] \
-#emph[Alignment]: each device execution is *aligned* with the others (program _AST_ alignment)
-
-#line(length: 100%, stroke: 0.05em + rgb("#23373b"))
-
-#only(1)[
-  1. Receiving *messages* from neighbours
-  #figure(image("images/ac-messages-perception.svg", width: 74%))
-]
-#only(2)[
-  2. Computation of the *macro-program* against the received messages
-  #figure(image("images/ac-computation.svg", width: 74%))
-]
-#only(3)[
-  3. Sending to neighbours the *computed* messages
-  #figure(image("images/ac-messages-propagation.svg", width: 74%))
-]
-
-#only(4)[
-  4. Sleep until next *round*...
-  #figure(image("images/ac.svg", width: 74%))
-]
-
-== Theoretical Foundations
-=== Self-stabilization
-#quote[The system is able to recover from any transient fault, without external intervention] #cite(label("DBLP:conf/coordination/AudritoBDV18"))
-=== Eventual consistency
-#quote[The system self-stabilizes to a predictable limit state as device density and speed increase #cite(label("7774387"))]
-=== Space-time Universality
-#quote[The system is able to compute any computable function, given enough time and space])
-
-
-== Research Area
-#let research-block(title, items) = block(
-  stroke: 2pt + gray.darken(20%),
-  fill: rgb("#eb811b5f").lighten(50%),
-  radius: 0em,
-  inset: 1em,
-  width: 100%,
-  height: 30%
-)[
-  === #title
-  #set text(size: 16pt)
-  #items
-]
-
-#components.side-by-side(columns: (1fr, 1fr, 1fr))[
-  #research-block("Applications", [
-      - #emph[Swarm Robotics ]
-      - Smart cities
-  ])
-][
-  #research-block("Cooperative Learning", [
-    - Proximity-based federated leanring
-  ])
-][
-  #research-block("Hybrid Approach", [
-    - #emph[Field Informed Reinforcement Learning]
-  ])
-]
-#components.side-by-side(columns: (1fr, 1fr))[
-  #research-block("Runtime Monitoring", [
-    - Spatial Logics with for Runtime Monitoring
-  ])
-][
-  #research-block("Programming Languauges", [
-    - Functional Reactive Programming for Aggregate
-    - Visual programming for collective systems
-  ])
-]
-
-#v(0.5em)
-
-#only(2)[
-  These areas need stil to be explored?
-]
-
-#focus-slide[
-  *NO.*
-
-  #only(2)[Thanks for your attention!]
-  #only(3)[... April Fools! 🤪]
-]
-
-= Swarm Programming via Aggragate
-
-== Swarm Programming A Aggregrate Programming Perspective
-Put some ideas here
-== Macro Swarm
-Put some charts
-== Pattern Formation Convergence
-Put the new idea of mirko here
-== Researcher Night Demo
-Put the demo of the researcher 
-== All here? Towards Hybrid Approach
-Todo
-== Many-Agent Reinforcement Learning -- In a nutshell
-Todo
-== Field Informed Reinforcement Learning -- Overall Idea
-Todo
-== Simulation settings
-Todo
-== Results
-Todo
-== Conclusion
 = Conclusion
 
-== Takeaways
+== Conclusion
+#components.side-by-side[
+   === Conclusion
+- Neighbor-based strategies enhance DTDE with performance close to CTDE
 
-#components.side-by-side(columns: (1fr, 1fr))[
-  === What We've Covered
-  - *Collective Systems* as a paradigm for future computing
-  - *Aggregate Programming* as a principled approach to swarm coordination
-  - *Field Calculus* abstractions for spatial computations
-  - *Hybrid approaches* combining self-organization with AI/ML techniques
+- k-NN averaging and experience sharing significantly improve DTDE
+
+- Communication overhead remains minimal, especially with experience sharing
+   
 ][
-  === Future Directions
-  - Scaling to larger and more heterogeneous systems
-  - Improving robustness in highly dynamic environments
-  - Bridging the gap between simulation and real-world deployment
-  - Democratizing collective programming with better tools and abstractions
-]
+  === Future Work
 
-== Takeaways
-#quote[The future of computing isn't about individual devices, but about the emergent intelligence of their collective behavior.]
-
-#align(center)[
-  #v(1em)
-  #emph[Thank you for your attention!]
-  #v(0.5em)
-  Questions? Comments?
-  #v(0.5em)
-  #text(blue)[#link("mailto:gianluca.aguzzi@unibo.it")]
+  - Explore the implementation of more advanced consensus algorithms
+  
+  - Develop more sophisticated communication protocols to reduce communication overhead
+  
+  - Test these approaches in a wider range and more complex scenarios
 ]
+#v(3cm)
+#place(
+  bottom + right,
+  dx: 0pt,
+  figure(image("images/sac-code.svg", width: 15%)) ,
+)
