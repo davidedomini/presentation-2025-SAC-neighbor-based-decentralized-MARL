@@ -209,8 +209,8 @@ Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
 - Each agent maintains a *local Q-network* and shares its Q-values with its neighbors
 - Each neighbor *average the received Q-values* and use the result to update its own Q-network
 - Formally, the update rule for agent $i$ at time $t+1$ is:
-  - $#sym.theta_i^{t+1} = #sym.theta_i^{t} + #sym.alpha #sym.sum_{j #sym.in N_k(i) frac(1,k) #sym.theta_j^{t}}$
-
+  - $#sym.theta^(t+1)_i = #sym.theta^t_i + #sym.alpha #sym.sum _(j #sym.in N_k(i)) frac(1,k) #sym.theta^t_j$ 
+  
 == What they have in common?
 - A plethora of _devices_ and _services_ that need to work together
   - *Autonomous* and *distributed* systems
