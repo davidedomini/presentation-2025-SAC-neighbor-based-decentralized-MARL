@@ -201,7 +201,7 @@ Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
   - The length of a path is the #emph[sum of the weights] of the edges along the path
   - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
   - Then, the set of #emph[k-nearest neighbors] of agent $i$ is defined as: 
-    - $N_k(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
+    - $N_(k)(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
 ]
 
 == K-Nearest Neighbor Averaging
@@ -209,8 +209,8 @@ Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
 - Each agent maintains a *local Q-network* and shares its Q-values with its neighbors
 - Each neighbor *average the received Q-values* and use the result to update its own Q-network
 - Formally, the update rule for agent $i$ at time $t+1$ is:
-  - $#sym.theta^(t+1)_i = #sym.theta^t_i + #sym.alpha #sym.sum _(j #sym.in N_k(i)) frac(1,k) #sym.theta^t_j$ 
-  
+  - $#sym.theta^(t+1)_i = #sym.theta^t_i + #sym.alpha #sym.sum _(j #sym.in N_(k)(i)) frac(1,k) #sym.theta^t_j$ 
+
 == What they have in common?
 - A plethora of _devices_ and _services_ that need to work together
   - *Autonomous* and *distributed* systems
