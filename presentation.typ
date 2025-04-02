@@ -110,18 +110,18 @@ Multi-Agent Reinforcement Learning],
 ]
 
 
-== Formalization
-In this paper, we consider *partially observable networked markov decision process* #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$, where:
+// == Formalization
+// In this paper, we consider *partially observable networked markov decision process* #cite(label("DBLP:journals/tac/AdlakhaLG12"))as a tuple $(cal(G), cal(S), cal(A), cal(O), cal(P), cal(R), #sym.gamma)$, where:
 
-#h(0.5cm)
+// #h(0.5cm)
 
-  - $cal(G) = (N, E)$ is a *communication graph*, where $N$ is the set of $n$ *agents* and $E #sym.subset.eq N #sym.times N$ represents the *communication links* between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
-  - $cal(S)$ is the *global state space*
-  - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the action space of agent $i$
-  - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the observation space for agent $i$
-  - $cal(P): cal(S) #sym.times cal(A) #sym.times cal(S) #sym.arrow.r  [0, 1]$ is the *state transition function*, describing the probability of transitioning to a new state $s' #sym.in cal(S)$ given the current state $s #sym.in cal(S)$ and joint action $a #sym.in cal(A)$
-  - $cal(R) = \{cal(R)^i\}, {i #sym.in N}$, where $cal(R)^i: cal(S) #sym.times cal(A) #sym.arrow.r R$ is the *reward function* for agent $i$
-  - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
+//   - $cal(G) = (N, E)$ is a *communication graph*, where $N$ is the set of $n$ *agents* and $E #sym.subset.eq N #sym.times N$ represents the *communication links* between agents. Time-varying graphs $cal(G)_t = (N, E_t)$ can be used to represent communication evolving over time $t$
+//   - $cal(S)$ is the *global state space*
+//   - $cal(A) = cal(A)^1 #sym.times #sym.dots #sym.times cal(A)^n$ is the *joint action space*, where $cal(A)^i$ is the action space of agent $i$
+//   - $cal(O) = cal(O)^1 #sym.times #sym.dots #sym.times cal(O)^n$ is the *joint observation space*, where $cal(O)^i$ is the observation space for agent $i$
+//   - $cal(P): cal(S) #sym.times cal(A) #sym.times cal(S) #sym.arrow.r  [0, 1]$ is the *state transition function*, describing the probability of transitioning to a new state $s' #sym.in cal(S)$ given the current state $s #sym.in cal(S)$ and joint action $a #sym.in cal(A)$
+//   - $cal(R) = \{cal(R)^i\}, {i #sym.in N}$, where $cal(R)^i: cal(S) #sym.times cal(A) #sym.arrow.r R$ is the *reward function* for agent $i$
+//   - $#sym.gamma #sym.in [0, 1]$ is the *discount factor*
 
 
 == Learning and Execution Strategies
@@ -189,6 +189,20 @@ In this paper, we consider *partially observable networked markov decision proce
  - *Building heating management:* buildings in residential districts exhibit different healing patterns compared to those in industrial districts
 ]
 
+== K-nearest Neighbors Formalization
+
+Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
+  - $N$ is the set of #emph[agents]
+  - $E$ is the set of #emph[edges] (i.e., communication link)
+  - $W: E #sym.arrow.r #sym.RR^+$ is a weight function assigning a #emph[positive weight] to each edge
+
+#only(2)[
+  Let $d(i,j)$ denote the #emph[shortest path] length between agents $i$ and $j$ in the weighted graph $G$
+  - The length of a path is the #emph[sum of the weights] of the edges along the path
+  - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
+  - Then, the set of #emph[k-nearest neighbors] of agent $i$ is defined as: 
+    - $N_k(i) = \{ j | i #sym.eq.not j, rank(d(i,j))#sym.lt.eq k \}$
+]
 
 == What they have in common?
 - A plethora of _devices_ and _services_ that need to work together
