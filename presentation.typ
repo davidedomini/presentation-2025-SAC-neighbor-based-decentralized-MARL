@@ -270,6 +270,15 @@ In this paper, we consider #emph[partially observable networked markov decision 
   #figure((image("images/episode_reward_mean.jpg", width: 90%)))
 ]
 
+== Communication overhead
+
+#components.side-by-side[
+   - k-NN Averaging might lead to consistent overhead in case of #emph[large models]
+   - Experience sharing #emph[contains overhead] and leads to CTDE like performances
+][
+  #figure((image("images/scalability.jpg", width: 80%)))
+]
+
 = Conclusion
 
 == Conclusion
