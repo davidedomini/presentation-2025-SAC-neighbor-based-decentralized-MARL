@@ -238,9 +238,9 @@ In this paper, we consider #emph[partially observable networked markov decision 
 - It consists of a 2D Euclidean space populated by *A agents* and *T targets*, initially placed at random locations
 - #emph[Goal:] agents must work together to *capture* all targets, resulting in a successful termination of the environment episode
 - #emph[Reward composed by various factor:] collisions, time steps, moving towards items, moving away from agents
-#only(2)[
-   #figure((image("images/behavior.svg", width:40%)))
-]
+
+#figure((image("images/behavior.svg", width:40%)))
+
 
 == Evaluation: Experimental Setup
 - The environment was implemented using the #emph[Gymnasium framework]
