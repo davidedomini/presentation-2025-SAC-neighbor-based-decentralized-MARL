@@ -134,7 +134,6 @@ In this paper, we consider *partially observable networked markov decision proce
 ]
 
 
-
 == Motivation
 #let research-block(title, items) = block(
   stroke: 2pt + gray.darken(20%),
@@ -174,6 +173,20 @@ In this paper, we consider *partially observable networked markov decision proce
   #only(2)[#research-block("Goal", [
     Achieve both efficient #emph[decentralized learning] and #emph[effective coordination]
   ])]
+]
+
+#focus-slide[
+  *Why neighborhood matters?*
+]
+
+== Importance of neighbors
+
+#quote[Devices in #emph[spatial proximity] have #emph[similar experiences] and make #emph[similar observations], as the phenomena to capture are often intrinsically #emph[context dependent].#cite(label("esterle2022deep"))]
+
+#only(2)[
+ === Reference Scenarios
+ - *Urban traffic prediction:* traffic patterns observed by devices within the same city district are likely to be more similar compared to those observed by devices in different districts
+ - *Building heating management:* buildings in residential districts exhibit different healing patterns compared to those in industrial districts
 ]
 
 
