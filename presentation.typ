@@ -201,7 +201,7 @@ Formally, we consider a #emph[weighted communication graph] $G = (N, E, W)$
   - The length of a path is the #emph[sum of the weights] of the edges along the path
   - If no path exists between $i$ and $j$, we set $d(i,j) = #sym.infinity$
   - Then, the set of #emph[k-nearest neighbors] of agent $i$ is defined as: 
-    - $N_k(i) = \{ j | i #sym.eq.not j, rank(d(i,j))#sym.lt.eq k \}$
+    - $N_k(i) = \{ j | i #sym.eq.not j, "rank"(d(i,j))#sym.lt.eq k \}$
 ]
 
 == What they have in common?
