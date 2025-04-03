@@ -252,14 +252,24 @@ In this paper, we consider #emph[partially observable networked markov decision 
 
 == Evaluation: Metrics
 
-=== Mean Episode Reward
-
-- For a certain episode $i$, composed of $n$ agents, last $T$ time steps, the total reward is calculated as: $R_i = #sym.sum^T_(t=0) #sym.sum^t_(j=1) r_j^t$
+#feature-block("Mean Episode Reward", [
+  - For a certain episode $i$, composed of $n$ agents, last $T$ time steps, the total reward is calculated as: $R_i = #sym.sum^T_(t=0) #sym.sum^t_(j=1) r_j^t$
 - The reward $R_("mean")$, for the all the episodes N, can be calculated as the *arithmetic mean* of the individual rewards per episode 
+], icon: fa-award() + " ")
 
-=== Mean Episode Length
-- Represents the average number of time steps needed to reaching the terminal state
+#feature-block("Mean Episode Length", [
+- Represents the average number of time steps needed to *reaching the terminal state*
 - $L_("mean") = frac(1,N) #sym.sum^N_(i=0) L_i$
+], icon: fa-stopwatch-20() + " ")
+
+// === Mean Episode Reward
+
+// - For a certain episode $i$, composed of $n$ agents, last $T$ time steps, the total reward is calculated as: $R_i = #sym.sum^T_(t=0) #sym.sum^t_(j=1) r_j^t$
+// - The reward $R_("mean")$, for the all the episodes N, can be calculated as the *arithmetic mean* of the individual rewards per episode 
+
+// === Mean Episode Length
+// - Represents the average number of time steps needed to reaching the terminal state
+// - $L_("mean") = frac(1,N) #sym.sum^N_(i=0) L_i$
 
 
 == Evaluation: Training Results
